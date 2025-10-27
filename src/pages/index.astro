@@ -1,10 +1,59 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import Greeting from "../components/Greeting";
-const pageTitle = "Home Page";
+const pageTitle = "Welcome";
 ---
 
 <BaseLayout pageTitle={pageTitle}>
-    <h2>My awesome blog subtitle</h2>
-    <Greeting client:load messages={["Hej", "Hallo", "Hola", "Habari"]} />
+    <hr />
+    <div class="presentation">
+        <img src="/adrar.svg" sizes="auto" role="img" />
+        <div class="container">
+            <h3>Welcome to Adrar formation !</h3>
+            <p>
+                Your journey to become fluent in English starts here. Whether
+                you're a beginner or already confident, our app helps you
+                improve at your own pace with interactive lessons, fun
+                exercises, and real-life situations. Each session brings you
+                closer to speaking with confidence and enjoying English in
+                everyday life.
+            </p>
+            <p><strong>Ready? Let's learn,let's speak, let's shine!</strong></p>
+        </div>
+    </div>
+    <hr />
+    <div class="test">
+        <h3>Know your level</h3>
+        <div class="container" style="width: 15em;">
+            <p><strong>Start the test</strong></p>
+            <p>25 minutes</p>
+        </div>
+    </div>
 </BaseLayout>
+<style is:global>
+    html {
+        background-color: #c7eef4;
+    }
+    h1 {
+        color: rgb(0, 0, 0);
+        font-size: 4rem;
+        text-align: center;
+    }
+    .presentation {
+        display: flex;
+        flex-direction: column;
+    }
+    .test {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-size: x-large;
+    }
+    .container {
+        text-align: center;
+        border-radius: 25px;
+        border: solid white;
+        padding: 15px;
+        margin: 15px;
+        background-color: #3b73cc;
+    }
+</style>
