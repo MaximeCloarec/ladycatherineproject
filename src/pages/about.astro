@@ -4,45 +4,34 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 const pageTitle = "About Me";
 
 const identity = {
-    firstName: "Maxime",
+    firstName: "Lady Catherine",
     country: "France",
-    occupation: "Dev",
-    hobbies: ["gaming", "coding", "reading"],
+    occupation: "English teacher",
+    hobbies: ["teaching", "English", "tennis"],
 };
-
-const skills = ["HTML", "CSS", "JavaScript", "React", "Astro", "Writing Docs"];
-
-const happy = true;
-const finished = true;
-const goal = 3;
-
-const skillColor = "navy";
-const fontWeight = "bold";
-const textCase = "uppercase";
 ---
 
-<BaseLayout pageTitle={pageTitle}
-    ><style is:global define:vars={{ skillColor, fontWeight, textCase }}>
+<BaseLayout pageTitle={pageTitle}>
+    <style is:global>
+        html {
+            background-color: #c7eef4;
+        }
         h1 {
-            color: purple;
             font-size: 4rem;
         }
-        .skill {
-            color: var(--skillColor);
-            font-weight: var(--fontWeight);
-            text-transform: var(--textCase);
-        }
     </style>
-    <h2>... and my new Astro site!</h2>
+    <h2>... and my new Teaching Website!</h2>
 
     <p>
-        I am working through Astro's introductory tutorial. This is the second
-        page on my website, and it's the first one I built myself!
+        I am working through to make English easy and available for everybody.
+        This is the second page on my website, and it's the first one I built
+        myself!
     </p>
 
     <p>
-        This site will update as I complete more of the tutorial, so keep
-        checking back and see how my journey is going!
+        This site will update as I find more interesting news from all around
+        the world and create new lessons, so keep checking back and see how this
+        website is growing!
     </p>
     <p>Here are a few facts about me:</p>
     <ul>
@@ -51,27 +40,13 @@ const textCase = "uppercase";
             I live in {identity.country} and I work as a {identity.occupation}.
         </li>
         {
-            identity.hobbies.length >= 2 && (
+            identity.hobbies.length >= 3 && (
                 <li>
-                    Two of my hobbies are: {identity.hobbies[0]} and{" "}
-                    {identity.hobbies[1]}
+                    Some of my hobbies are: {identity.hobbies[0]},
+                    {identity.hobbies[2]} and of course {identity.hobbies[1]}!
                 </li>
             )
         }
     </ul>
-    <p>My skills are:</p>
-    <ul>
-        {skills.map((skill) => <li class="skill">{skill}</li>)}
-    </ul>
-    {happy && <p>I am happy to be learning Astro!</p>}
-
-    {finished && <p>I finished this tutorial!</p>}
-
-    {
-        goal === 3 ? (
-            <p>My goal is to finish in 3 days.</p>
-        ) : (
-            <p>My goal is not 3 days.</p>
-        )
-    }
+    <p>Let's go through this adventure together and learn english !</p>
 </BaseLayout>
