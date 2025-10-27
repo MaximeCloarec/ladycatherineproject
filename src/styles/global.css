@@ -8,7 +8,7 @@ html.dark {
 }
 
 html {
-    background-color: #f1f5f9;
+    background-color: #C7EEF4;
     font-family: sans-serif;
 }
 
@@ -16,8 +16,18 @@ body {
     margin: 0 auto;
     width: 100%;
     max-width: 80ch;
-    padding: 1rem;
     line-height: 1.5;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+  flex: 1; /* pousse le footer vers le bas */
+}
+
+footer {
+  margin-top: auto; /* colle le footer en bas */
 }
 
 * {
