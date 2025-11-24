@@ -1,0 +1,93 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+const pageTitle = "Register";
+
+if (Astro.request.method === "POST") {
+  try {
+    const data = await Astro.request.formData();
+
+    if (data.get("password1") === data.get("password2")) {
+      const response = await fetch("http://localhost:8080/accounts/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: data.get("username"),
+          email: data.get("email"),
+          password: data.get("password1"),
+        }),
+      });
+
+      if (response.ok) {
+        return Astro.redirect("/login");
+      }
+
+      console.log("Backend response (error):", await response.text());
+    }
+  } catch (error) {
+    console.log("Erreur:", error);
+  }
+}
+
+
+---
+<BaseLayout pageTitle={pageTitle}>
+  <div class="flex items-center justify-center">
+    <div class="bg-blue-700 p-6 rounded-lg border border-white flex flex-col w-full max-w-md">
+  
+      <form method="POST"
+        action=""
+        class="flex flex-col gap-4 text-lg"
+        >
+        <label class="flex flex-col gap-1 text-white">
+          Email
+         <input
+           class="border border-white rounded p-2 bg-transparent text-white"
+           type="email"
+           name="email"
+           required
+         />
+       </label>
+
+        <label class="flex flex-col gap-1 text-white">
+          Pseudo
+         <input
+           class="border border-white rounded p-2 bg-transparent text-white"
+           type="text"
+           name="username"
+           required
+         />
+       </label>
+
+       <label class="flex flex-col gap-1 text-white">
+         Password
+         <input
+           class="border border-white rounded p-2 bg-transparent text-white"
+           type="password"
+           name="password1"
+           required
+         />
+       </label>
+       <label class="flex flex-col gap-1 text-white">
+         Repeat password
+         <input
+           class="border border-white rounded p-2 bg-transparent text-white"
+           type="password"
+           name="password2"
+           required
+         />
+       </label>
+       <button
+          type="submit"
+         class="mt-4 border border-white rounded p-2 text-white bg-blue-500 hover:bg-blue-500 transition"
+        >
+         Soumettre
+        </button>
+     </form>
+   </div>
+  </div>
+</BaseLayout>
+
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4" defer></script>
+
