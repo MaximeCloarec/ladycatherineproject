@@ -1,0 +1,191 @@
+---
+import { getImage } from "astro:assets";
+import BaseLayout from "../layouts/BaseLayout.astro";
+const pageTitle = "My account";
+
+const user = {
+  id: 0,
+  firstname: null,
+  lastname: null,
+  email: null,
+  profileImg: "../../public/icones/user-default-img.png",
+};
+---
+
+<BaseLayout pageTitle={pageTitle}>
+  <p>
+    Welcome to your account page. Here you can manage your personal
+    informations.
+  </p>
+
+  <section class="section-info">
+    <div class="profile-info">
+      <div class="temp">
+        <div class="profile-photo">
+          <img src={user.profileImg} id="imageProfil" alt="Photo profil" />
+        </div>
+
+        <div class="profile-details">
+          <p>Les informations du profil :</p>
+          <div class="personal-info">
+            <p id="firstname"><strong>Firstname : </strong> {user.firstname}</p>
+            <p id="lastname"><strong>Lastname :</strong> {user.lastname}</p>
+            <p id="email"><strong>Email :</strong> {user.email}</p>
+          </div>
+        </div>
+        <a href="#"
+          ><button class="update-photo-btn" id="update-photo-btn">
+            Modifier mon profil
+          </button></a
+        >
+      </div>
+    </div>
+  </section>
+
+  <!-- A garder ?? -->
+  <section class="settings">
+    <h2>Paramètres du compte</h2>
+    <ul>
+      <li><a href="/change-password">Modifier votre mot de passe</a></li>
+    </ul>
+  </section>
+</BaseLayout>
+
+<style>
+  .section-info {
+    border-radius: 15px;
+    padding: 1rem;
+    margin: 25px 0px;
+    display: flex;
+  }
+  .profile-info {
+    background-color: #b6cfee;
+    border: 1px solid #0b0d25;
+    border-radius: 15px;
+    padding: 3px;
+    gap: 2rem;
+    display: flex;
+    margin: auto;
+  }
+
+  .profile-photo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .profile-photo img {
+    width: 100px;
+    height: 100px;
+  }
+
+  .settings ul,
+  .social-links ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .settings li,
+  .social-links li {
+    margin: 0.5rem 0;
+  }
+
+  .settings a,
+  .social-links a {
+    text-decoration: none;
+    color: #0070f3;
+  }
+
+  .update-photo-btn {
+    background-color: #3e73b8;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 10px 0px 0px 5px;
+    transition:
+      background-color 0.3s ease,
+      transform 0.3s ease;
+  }
+
+  .temp {
+    background-color: rgb(240, 248, 255);
+    padding: 1px;
+    border: 1px solid black;
+    padding: 15px;
+    border-radius: 10px;
+  }
+
+  button {
+    padding: 0.8rem 1.2rem;
+    background-color: #3e73b8;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: #265da5;
+  }
+</style>
+
+<script type="module">
+
+  console.log("token", storage.getItem(jwToken));
+
+  async function fetchUserData() {
+    try {
+      const response = await fetch("/account/me", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: storage.getItem(jwToken),
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(
+          "ERREUR de récupération des données utilisateur !"
+        );
+      }
+
+      const data = await response.json();
+      user.firstname = data.firstname;
+      user.lastname = data.lastname;
+      user.email = data.email;
+      user.profileImg = data.profileImg || user.profileImg;
+      updateUserProfile();
+    } catch (e) {
+      console.error("Erreur:", e);
+    }
+  }
+
+  //TODO
+  function updateUserProfile() {
+    console.log("update profile");
+    const imageProfil = document.getElementById("imageProfil");
+    const firstname = document.getElementById("firstname");
+    const lastname = document.getElementById("lastname");
+    const email = document.getElementById("email");
+
+    imageProfil.src = user.profileImg;
+    firstname.textContent = `Firstname : ${user.firstname}`;
+    lastname.textContent = `Lastname : ${user.lastname}`;
+    email.textContent = `Email : ${user.email}`;
+  }
+
+  function isValidImage(file) {
+    const validTypes = ["image/jpeg", "image/png", "image/webp"]; //ajouter des types si besoin
+    return validTypes.includes(file.type);
+  }
+
+  function isOneFile(fileInput) {
+    return fileInput.files.length === 1;
+  }
+
+  function valideData() {
+    //TODO
+  }
+</script>
