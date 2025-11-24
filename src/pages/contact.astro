@@ -4,8 +4,37 @@ import Header from "../components/Header.astro";
 
 import Footer from "../components/Footer.astro";
 import "../styles/global.css";
+import { requestHasLocale } from "astro:i18n";
 
 const pageTitle = "Contact";
+
+if (Astro.request.method === "POST") {
+    try{
+        const data = await Astro.request.formData();
+
+        const response = await fetch("http://localhost:8080/contact/send", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body : JSON.stringify({
+                lastname: data.get("lastname"),
+                firstname: data.get("firstname"),
+                email: data.get("email"),
+                message: data.get("message"),
+            }),
+        });
+
+        if (response.ok) {
+            
+            return Astro.redirect("/contact?success=1");
+        }
+        console.log("Backend response (error):", await response.text());
+    } catch (error){
+        console.log("Erreur : ", error);
+    }
+}
+const success = Astro.url.searchParams.get("success");
 ---
 
 <style>
@@ -42,7 +71,7 @@ input, textarea {
     width: 100%;
     padding: 0.75rem;
     border: 2px solid white;
-    border-radius: 5%;
+    border-radius: 20px;
     background: #3B73CC;
     color: white;
 
@@ -82,15 +111,31 @@ button:hover {
         <hr>
         <p>Have a question, an idea, or a project? Send us a message!</p>
 
-        <form>
+        { success === "1" && (
+            <div style="
+            background: #4ade80;
+                color: black;
+                padding: 1rem;
+                margin: 1rem auto;
+                max-width: 400px;
+                border-radius: 10px;
+                text-align: center;
+                font-weight: bold;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            ">
+                ✅ Your message has been sent successfully!
+            </div>
+        )}
+
+        <form method="POST">
         <label>
             <span>Last name</span>
-            <input type="text" name="name" placeholder="Your last name" required />
+            <input type="text" name="lastname" placeholder="Your last name" required />
         </label>
 
         <label>
             <span>First name</span>
-            <input type="text" name="name" placeholder="Your first name" required />
+            <input type="text" name="firstname" placeholder="Your first name" required />
         </label>
 
         <label>
