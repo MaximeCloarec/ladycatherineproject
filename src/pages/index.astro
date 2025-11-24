@@ -5,8 +5,8 @@ const pageTitle = "Welcome";
 
 <BaseLayout pageTitle={pageTitle}>
     <hr />
-    <div class="presentation">
-        <img src="/adrar.svg" sizes="auto" role="img" />
+    <div class="presentation flex flex-col items-center justify-center">
+        <img src="/adrar.svg" class="w-64 h-64 m-8" role="img" />
         <div class="container">
             <h3>Welcome to Adrar formation !</h3>
             <p>
@@ -27,7 +27,9 @@ const pageTitle = "Welcome";
             <p><strong>Start the test</strong></p>
             <p>25 minutes</p>
         </div>
-    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </BaseLayout>
 <style is:global>
     h1 {
