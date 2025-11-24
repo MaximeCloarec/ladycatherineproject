@@ -1,0 +1,54 @@
+---
+const { title, desc, price } = Astro.props;
+---
+
+<li>
+    <div class="card">
+        <div class="content">
+            <div class="text">
+                <h3>{title}</h3>
+                <p>{desc}</p>
+            </div>
+            <img src="/Flag_of_the_United_Kingdom_(3-5).svg" alt="" />
+        </div>
+        <hr />
+
+        <h4 class="price">{price}</h4>
+    </div>
+</li>
+
+<style>
+    img {
+        width: 250px;
+        height: 152px;
+        border-radius: 25px;
+        border: solid white 2px;
+    }
+
+    h3 {
+        font-size: 3em;
+    }
+    p {
+        font-size: 2em;
+    }
+    .card {
+        text-align: center;
+        border-radius: 25px;
+        border: solid white 5px;
+        padding: 15px;
+        margin: 15px;
+        background-color: #3b73cc;
+        color: white;
+    }
+    .content {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+    .text {
+        width: 50%;
+    }
+    .price {
+        font-size: 2em;
+    }
+</style>

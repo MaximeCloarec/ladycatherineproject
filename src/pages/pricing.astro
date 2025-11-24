@@ -1,0 +1,33 @@
+---
+import PricingCard from "../components/PricingCard.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+const pageTitle = "Pricing";
+---
+
+<BaseLayout pageTitle={pageTitle}>
+    <div>
+        <ul>
+            <PricingCard
+                title={"Level A1/A2"}
+                desc={"Training and support for beginners"}
+                price={"1 month / 6euro - 1 year / 50euro"}
+            />
+            <PricingCard
+                title={"Level B1/B2"}
+                desc={"Intermediate level development to engage in smooth conversation"}
+                price={"1 month / 8euro - 1 year / 80euro"}
+            />
+            <PricingCard
+                title={"Level C1/C2"}
+                desc={"Bilinguale and/or advanced training for confident communication"}
+                price={"1 month / 10euro - 1 year / 100euro"}
+            />
+        </ul>
+    </div>
+</BaseLayout>
+
+<style>
+    ul {
+        list-style-type: none;
+    }
+</style>
