@@ -1,13 +1,90 @@
 ---
-import Hamburger from "./Hamburger.astro";
-import Navigation from "./Navigation.astro";
-import ThemeIcon from "./ThemeIcon.astro";
+
+
 ---
 
-<header>
-    <nav>
-        <Hamburger />
-        <ThemeIcon />
-        <Navigation />
+<header class="bg-blue-600 shadow-md w-full">
+  <div class="px-4 py-4 flex items-center justify-between">
+    <!-- Logo on the left -->
+    <a href="/">
+      <img class="w-20 h-20 rounded-sm bg-white p-2" src="/public/adrar.svg" alt="Logo">
+    </a>
+
+    <!-- Centered Navigation (Home, About, Blog, Tags, Pricing, Contact) -->
+    <nav class="hidden md:flex space-x-6 absolute left-1/2 transform -translate-x-1/2 text-lg">
+      <a href="/home" class="text-white hover:text-blue-500">Home</a>
+      <a href="/about" class="text-white hover:text-blue-500">About</a>
+      <a href="/blog" class="text-white hover:text-blue-500">Blog</a>
+      <a href="/tags" class="text-white hover:text-blue-500">Tags</a>
+      <a href="/pricing" class="text-white hover:text-blue-500">Pricing</a>
+      <a href="/contact" class="text-white hover:text-blue-500">Contact</a>
     </nav>
+
+    <!-- Right-aligned: Search Bar, Register, Login -->
+    <div class="hidden md:flex items-center space-x-4">
+      <!-- Search Bar -->
+      <div class="relative">
+        <input 
+          type="text" 
+          placeholder="Search..." 
+          class="pl-8 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"
+        />
+        <svg class="absolute left-2 top-2.5 h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+        </svg>
+      </div>
+      
+      <!-- Register Button -->
+      <a href="/register" class="bg-white text-blue-800 px-4 py-2 rounded-lg hover:bg-blue-600">Register</a>
+      
+      <!-- Login Button -->
+      <a href="/login" class="bg-white text-blue-800 px-4 py-2 rounded-lg hover:bg-blue-600">Login</a>
+    </div>
+
+    <!-- Mobile Hamburger Menu Button -->
+    <button id="menu-toggle" class="md:hidden text-white focus:outline-none ml-auto">
+      <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200 w-full">
+    <div class="px-4 py-4 space-y-4">
+      <a href="/home" class="block text-gray-700 hover:text-blue-500">Home</a>
+      <a href="/about" class="block text-gray-700 hover:text-blue-500">About</a>
+      <a href="/blog" class="block text-gray-700 hover:text-blue-500">Blog</a>
+      <a href="/tags" class="block text-gray-700 hover:text-blue-500">Tags</a>
+      <a href="/pricing" class="block text-gray-700 hover:text-blue-500">Pricing</a>
+      <a href="/contact" class="block text-gray-700 hover:text-blue-500">Contact</a>
+      <a href="/register" class="block text-gray-700 hover:text-blue-500">Register</a>
+      <a href="/login" class="block text-gray-700 hover:text-blue-500">Login</a>
+      
+      <!-- Mobile Search Bar -->
+      <div class="relative">
+        <input 
+          type="text" 
+          placeholder="Search..." 
+          class="w-full pl-8 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+        <svg class="absolute left-2 top-2.5 h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+        </svg>
+      </div>
+    </div>
+  </div>
 </header>
+
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<script>
+  // Mobile menu toggle script
+  const menuToggle = document.getElementById('menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  if (menuToggle && mobileMenu) {
+    menuToggle.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+  }
+</script>
